@@ -7,6 +7,10 @@
 #
 cmake_minimum_required (VERSION 2.8.8)
 
+if (NOT DEFINED CMAKE_C_COMPILER)
+	set(CMAKE_C_COMPILER /usr/bin/clang)
+endif()
+
 if (NOT DEFINED BUILD_PLATFORM)
 	set(BUILD_PLATFORM "GENERIC")
 endif()
@@ -17,6 +21,10 @@ set(WEENY "${CMAKE_CURRENT_SOURCE_DIR}/../@weeny")
 #
 #	2. заголовок проекта, макросы
 #
+if (NOT DEFINED PROJECT_NAME)
+	set(PROJECT_NAME WeenyProject)
+endif()
+
 project (${PROJECT_NAME})
 
 if (${BUILD_PLATFORM} STREQUAL "IOS")

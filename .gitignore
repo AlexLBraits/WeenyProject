@@ -4,3 +4,4 @@ CMakeCache.txt
 CMakeFiles/
 *~. DS_Store
 build
+*.user
