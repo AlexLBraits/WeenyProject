@@ -1,7 +1,8 @@
-#include <WApplication.h>
+#include <GApplication.h>
 
 int main(int argc, char** argv)
 {
-    const WApplication& app = WApplication::getInstance(argc, argv);
+    GApplication& app = Singleton<GApplication>::getInstance(argc, argv);
+    app.initialize();
     return app.exec();
 }
