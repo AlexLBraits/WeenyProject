@@ -7,9 +7,9 @@
 #
 cmake_minimum_required (VERSION 2.8.8)
 
-if (NOT DEFINED CMAKE_C_COMPILER)
-	set(CMAKE_C_COMPILER /usr/bin/clang)
-endif()
+#if (NOT DEFINED CMAKE_C_COMPILER)
+#	set(CMAKE_C_COMPILER /usr/bin/clang)
+#endif()
 
 if (NOT DEFINED BUILD_PLATFORM)
 	set(BUILD_PLATFORM "GENERIC")
@@ -44,6 +44,8 @@ add_subdirectory(${WEENY} ${CMAKE_BINARY_DIR}/weeny)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${WEENY}/include)
+include_directories(${WEENY}/src/platforms/${BUILD_PLATFORM})
+include_directories(${WEENY}/3rdparty)
 
 ###############################################################################
 #
