@@ -10,8 +10,8 @@ void GApplication::initialize()
 {
     Application::initialize();
 
-    UniverseLayerPtr player(new UniverseLayer());
-    player->m_root = DrawingNodePtr(new DrawingNode());
+    UniverseLayerPtr layer(new UniverseLayer());
+    layer->appendChild(new DrawingNode());
 
-    m_universe.push_back(player);
+    m_universe.push_back(layer);
 }
