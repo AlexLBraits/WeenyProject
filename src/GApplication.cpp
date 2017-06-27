@@ -13,25 +13,21 @@ void GApplication::initialize()
 
     UniverseLayerPtr layer(new UniverseLayer());
 
-    for (int i = 0; i < 2048; ++i)
-    { /// 2048 X 1536
-        RectangleNode* node = new RectangleNode(
-            glm::linearRand(256,512),
-            glm::linearRand(192,384),
-            glm::vec3(
-                glm::linearRand(0,2048),
-                glm::linearRand(0,1536),
-                0
-            ),
-            glm::vec4(
-                glm::linearRand(0.0,1.0),
-                glm::linearRand(0.0,1.0),
-                glm::linearRand(0.0,1.0),
-                1
-            )
-        );
-        layer->appendChild(node);
-    }
+    RectangleNode* node = new RectangleNode(
+        Application::app()->universe().window().width(),
+        Application::app()->universe().window().height(),
+        glm::vec3(0,0,0),
+        glm::vec4(1.0f,1.0f,1.0f,1.0f)
+    );
+
+    layer->appendChild(node);
+
+    node->setTranslation(glm::vec3(100.0f, 100.0f, 0.0f));
 
     m_universe.push_back(layer);
+
+    glm::vec3 st = layer->spectator()->translation();
+    st.x -= 100;
+    layer->spectator()->setTranslation(st);
+
 }

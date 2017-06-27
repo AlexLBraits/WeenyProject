@@ -2,6 +2,7 @@
 #define G_APPLICATION_H
 
 #include <application.h>
+#include <signal.h>
 
 class GApplication : public Application
 {
@@ -12,6 +13,9 @@ protected:
 
 public:
     void initialize() override;
+
+private:
+    ConnectionPtr m_con;
 };
 
 #endif /* G_APPLICATION_H */
