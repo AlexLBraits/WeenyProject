@@ -2,7 +2,7 @@
 #define G_APPLICATION_H
 
 #include <application.h>
-#include <signal.h>
+#include <base/signal.h>
 
 class GApplication : public Application
 {
