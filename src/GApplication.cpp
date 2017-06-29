@@ -16,22 +16,39 @@ void GApplication::initialize()
 
     float w = Application::app()->universe().window().width();
     float h = Application::app()->universe().window().height();
-    
-    RectangleNode* node = new RectangleNode(
-        w, h,
-        glm::vec3(0,0,0),
-        glm::vec4(1.0f,1.0f,1.0f,1.0f)
-    );
 
-    layer->appendChild(node);
+    for(int i = 0; i < 4500; ++i )
+    {
+        RectangleNode* node = new RectangleNode(
+            glm::linearRand(0.5f * w, w),
+            glm::linearRand(0.5f * h, h),
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec4(
+                glm::linearRand(0.0f, 1.0f),
+                glm::linearRand(0.0f, 1.0f),
+                glm::linearRand(0.0f, 1.0f),
+                1.0f
+            )
+        );
 
-    node->setTranslation(glm::vec3(100.0f, 100.0f, 0.0f));
-    node->setRotation(glm::vec3(0, 0, -0.25));
+        layer->appendChild(node);
+
+        node->setTranslation(
+                             glm::vec3(
+                                       glm::linearRand(0.0f, 0.5f * w),
+                                       glm::linearRand(0.0f, 0.5f * h),
+                                       1.0f*i
+                                       )
+                             );
+        node->setRotation(
+                          glm::vec3(
+                                    0,
+                                    0,
+                                    glm::linearRand(-0.25f, 0.25f)
+                                    )
+                          );
+    }
+
 
     m_universe.push_back(layer);
-
-//    glm::vec3 st = layer->spectator()->translation();
-//    st.x = -200;
-//    layer->spectator()->setTranslation(st);
-
 }
