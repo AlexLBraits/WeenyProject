@@ -2,6 +2,8 @@
 #include <universe/universe.h>
 #include <basicnodes.h>
 
+extern std::map<std::string, std::pair<const unsigned char*, unsigned int>> resources;
+
 GApplication::GApplication(int argc, char** argv)
     : Application(argc, argv)
 {
@@ -13,9 +15,11 @@ void GApplication::initialize()
 
     LayerPtr layer(new Layer());
 
-
     float w = Application::app()->universe().window().width();
     float h = Application::app()->universe().window().height();
+
+    std::pair<const unsigned char*, unsigned int> res = resources[":rc/images/red_room_floor.png"];
+    TexturePtr texture = TexturePtr(new Texture(res.first, res.second));
 
     for(int i = 0; i < 4500; ++i )
     {
@@ -47,8 +51,9 @@ void GApplication::initialize()
                                     glm::linearRand(-0.25f, 0.25f)
                                     )
                           );
-    }
 
+        node->setTexture(texture);
+    }
 
     m_universe.push_back(layer);
 }
