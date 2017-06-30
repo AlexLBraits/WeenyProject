@@ -2,7 +2,7 @@
 #include <universe/universe.h>
 #include <basicnodes.h>
 
-extern std::map<std::string, std::pair<const unsigned char*, unsigned int>> resources;
+#include <resources.h>
 
 GApplication::GApplication(int argc, char** argv)
     : Application(argc, argv)
