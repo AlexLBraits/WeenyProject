@@ -39,6 +39,12 @@ ANDROID:
 	mkdir -p obj/$(ANDROID_ABI) && cd obj/$(ANDROID_ABI) && \
 	cmake \
 	-DBUILD_PLATFORM=$@ \
+	-DCMAKE_SYSTEM_NAME=Android \
+	-DCMAKE_SYSTEM_VERSION=$(ANDROID_BUILD_SDK_VERSION) \
+	-DCMAKE_ANDROID_ARCH_ABI=$(ANDROID_ABI) \
+	-DCMAKE_ANDROID_NDK=$(ANDROID_NDK) \
+	-DCMAKE_ANDROID_STL_TYPE=gnustl_static \
+	-DLIBRARY_OUTPUT_PATH=$(shell pwd)/build/$@/libs/$(ANDROID_ABI) \
 	$(COMMON_DEFINITIONS) \
 	-DANDROID_ACTIVITY_NAME=$(ANDROID_ACTIVITY_NAME) \
 	-DANDROID_BUILD_APPLICATION_ID=$(ANDROID_BUILD_APPLICATION_ID) \
@@ -49,15 +55,22 @@ ANDROID:
 	-DANDROID_JAVA_SOURCE_PATH=$(ANDROID_JAVA_SOURCE_PATH) \
 	-DANDROID_JNI_NATIVE_METHOD_NAME=$(ANDROID_JNI_NATIVE_METHOD_NAME) \
 	-DANDROID_PACKAGE_NAME=$(ANDROID_PACKAGE_NAME) \
-	-DCMAKE_TOOLCHAIN_FILE=../../../../../@weeny/src/platforms/ANDROID/android.toolchain.cmake \
-	-DLIBRARY_OUTPUT_PATH_ROOT=../../. \
-	../../../../	&& \
+	../../../../ && \
 	make install -j 8 && \
 	cd ../../. && \
 	./gradlew $(ANDROID_BUILD_TYPE) && \
 	adb install -r ./build/outputs/apk/$(PROJECT_NAME)-$(ANDROID_BUILD_TYPE).apk && \
 	adb shell am start -n $(ANDROID_BUILD_APPLICATION_ID)/$(ANDROID_PACKAGE_NAME).$(ANDROID_ACTIVITY_NAME)
-	
+
+	# -DCMAKE_SYSTEM_NAME=Android \
+  	# -DCMAKE_SYSTEM_VERSION=23 \
+	# -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a \
+	# -DCMAKE_ANDROID_NDK=$(ANDROID_NDK) \
+	# -DCMAKE_ANDROID_STL_TYPE=gnustl_static \
+
+	# -DCMAKE_TOOLCHAIN_FILE=../../../../../@weeny/src/platforms/ANDROID/android.toolchain.cmake \
+	# -DLIBRARY_OUTPUT_PATH_ROOT=../../. \
+
 ANDROID_RUN:
 	cd build/ANDROID && \
 	adb install -r ./build/outputs/apk/$(PROJECT_NAME)-$(ANDROID_BUILD_TYPE).apk && \
