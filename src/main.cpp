@@ -1,7 +1,7 @@
-#include <GApplication.h>
+#include <application.h>
 
 int main(int argc, char** argv)
 {
-    GApplication& app = Singleton<GApplication>::getInstance(argc, argv);
+    Application& app = Singleton<Application>::getInstance(argc, argv);
     return app.exec();
 }
